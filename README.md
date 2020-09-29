@@ -1,1 +1,1 @@
-# deploying_Graylog_to_EKS
+# deploying_graylog_in_aws_eks
