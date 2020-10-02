@@ -2,6 +2,14 @@
 
 name: Deploy httpd in EKS
 
+env:
+  CONTAINER_IMAGE_VERSION: 0.3
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}  
+  DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+  AWS_DEFAULT_REGION: us-east-1
+  AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+  AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+  
 on: [push]
 
 jobs:
@@ -12,15 +20,31 @@ jobs:
         
       - name: Build httpd container image
         run: |
-          docker build ./ -t mtimoshchenko/mtim-test-ghact:0.2
+          docker build ./ -t mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
           
       - name: Docker login
-        env:
-          DOCKER_USER: ${{ secrets.DOCKER_USER }}  
-          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}  
         run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           
       - name: Push image to DockerHub
         run: |
           docker push mtimoshchenko/mtim-test-ghact:0.2
+        
+      - name: Configure AWS Credentials
+        run: |
+          export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
+          export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
+          export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+          
+      - name: Installing eksctl tool
+        run: |
+          curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+          mv /tmp/eksctl /usr/local/bin
+          eksctl version
+          
+      - name: Installing kubectl tool
+        run: |
+          curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x ./kubectl
+          mv ./kubectl /usr/local/bin
+          kubectl version --client
