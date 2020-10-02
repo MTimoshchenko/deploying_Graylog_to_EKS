@@ -1,5 +1,5 @@
 # deploying_graylog_in_aws_eks
-Diagram:
+Diagramkubectl :
 ![Image alt](https://github.com/MTimoshchenko/deploying_graylog_in_aws_eks/blob/master/diagram.png)
 
 ToDo:  
