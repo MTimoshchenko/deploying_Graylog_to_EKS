@@ -1,6 +1,6 @@
 # deploying_graylog_in_aws_eks
-Chart:
-![Image alt](https://github.com/MTimoshchenko/deploying_graylog_in_aws_eks/blob/master/chart.png)
+Diagram:
+![Image alt](https://github.com/MTimoshchenko/deploying_graylog_in_aws_eks/blob/master/diagram.png)
 
 ToDo:  
 > ~~1. Create simple dockerfile to test~~    
