@@ -1,0 +1,63 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: apache-test
+  labels:
+    created_by: mtimoshchenko
+    app_name  : apache2
+    env       : test
+spec:
+  selector:
+    matchLabels:
+      project: test-gh-action
+    template:
+      metadata:
+        labels:
+          project: test-gh-action
+      spec:
+        containers:
+          - name : apache-container
+            image: mtimoshchenko/mtim-test-ghact:0.1
+            ports:
+              - containerPort: 80
+
+---
+apiVersion: autoscaling/v2beta1
+kind; HorizontalPodAutoscaler
+metadata:
+  name: apache-autoscaling
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v2betav1
+    kind: Deployment
+    name: apache-test-deployment-autocaling
+  minReplicas: 3
+  maxreplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: 75
+    - type: Resource
+      resource:
+        name : memory
+        targetAverageUtilization: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: autoscaling-apache-pods
+  lavels:
+    created_by: mtimoshchenko
+    app_name  : autoscaller
+    env       : test
+  spec:
+    selector:
+      project: test-gh-action
+    ports:
+      - name      : apache-listener
+        protocol  : TCP
+        port      : 80
+        targetPort: 80
+    type: LoadBalancer
