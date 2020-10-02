@@ -3,7 +3,7 @@
 name: Deploy httpd in EKS
 
 env:
-  CONTAINER_IMAGE_VERSION: 0.4
+  CONTAINER_IMAGE_VERSION: 0.5
   DOCKER_USER: ${{ secrets.DOCKER_USER }}  
   DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
   AWS_DEFAULT_REGION: us-east-1
@@ -18,17 +18,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-      - name: Build httpd container image
-        run: |
-          docker build ./ -t mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
-          
-      - name: Docker login
-        run: |
-          docker login -u $DOCKER_USER -p $DOCKER_PASS
-          
-      - name: Push image to DockerHub
-        run: |
-          docker push mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
+#      - name: Build httpd container image
+#        run: |
+#          docker build ./ -t mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
+#
+#      - name: Docker login
+#        run: |
+#          docker login -u $DOCKER_USER -p $DOCKER_PASS
+#
+#      - name: Push image to DockerHub
+#        run: |
+#          docker push mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
         
       - name: Configure AWS Credentials
         run: |
