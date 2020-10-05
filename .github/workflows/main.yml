@@ -38,6 +38,7 @@ jobs:
           sudo ./aws/install
           echo -e "#-----------------------------------#\nAWS CLI version is:\t"
           aws --version
+          aws s3 ls
         
       - name: Configure AWS Credentials
         run: |
