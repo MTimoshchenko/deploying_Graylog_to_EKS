@@ -4,6 +4,7 @@ kind: ClusterConfig
 metadata:
   name  : apache-test
   region: us-east-1
+  zones: ["us-east-1a, us-east-1b"]
 
 nodeGroups:
   - name           : worker-nodes-group-1
