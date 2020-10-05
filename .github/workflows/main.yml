@@ -68,10 +68,10 @@ jobs:
 
       - name: Verifying cluster created
         run: |
-        aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $CLUSTER_NAME
-        echo -e "#-----------------------------------#\nCluster info:\t"
-        eksctl get cluster -o yaml
-        echo -e "#-----------------------------------#\nNodegroup info:\t"
-        eksctl get nodegroup --cluster $CLUSTER_NAME -o yaml
-        echo -e "#-----------------------------------#\nCluster info from kubectl:\t"
-        kubectl cluster-info
+          aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $CLUSTER_NAME
+          echo -e "#-----------------------------------#\nCluster info:\t"
+          eksctl get cluster -o yaml
+          echo -e "#-----------------------------------#\nNodegroup info:\t"
+          eksctl get nodegroup --cluster $CLUSTER_NAME -o yaml
+          echo -e "#-----------------------------------#\nCluster info from kubectl:\t"
+          kubectl cluster-info
