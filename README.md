@@ -1,3 +1,4 @@
+![Deploy httpd in EKS](https://github.com/MTimoshchenko/deploying_graylog_in_aws_eks/workflows/Deploy%20httpd%20in%20EKS/badge.svg)
 # deploying_graylog_in_aws_eks
 Diagram :
 ![Image alt](https://github.com/MTimoshchenko/deploying_graylog_in_aws_eks/blob/master/diagram.png)
