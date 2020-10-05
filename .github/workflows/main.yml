@@ -7,7 +7,6 @@ env:
   CONTAINER_IMAGE_VERSION: 0.5
   DOCKER_USER: ${{ secrets.DOCKER_USER }}  
   DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-  AWS_DEFAULT_REGION: us-east-1
   
 on: [push]
 
@@ -42,7 +41,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-          aws-region: $AWS_DEFAULT_REGION
+          aws-region: us-east-1
           
       - name: Installing eksctl tool
         run: |
@@ -77,4 +76,4 @@ jobs:
 
       - name: Deploying simple app to EKS cluster
         run: |
-          eksctl apply -f apache-test.yaml
+          kubectl apply -f apache-test.yaml
