@@ -50,3 +50,9 @@ jobs:
           sudo mv ./kubectl /usr/local/bin
           echo -e "#-----------------------------------#\nkubectl version is:\t"
           kubectl version --client
+
+      - name: Creation of the EKS cluster
+        run: |
+          eksctl create cluster -f apache-test-cluster.yaml
+          echo -e "#-----------------------------------#\nCluster Info:\t"
+          kubectl cluster-info
