@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name : apache-container
-          image: mtimoshchenko/mtim-test-ghact:0.1
+          image: mtimoshchenko/mtim-test-ghact:0.5
           ports:
             - containerPort: 80
 

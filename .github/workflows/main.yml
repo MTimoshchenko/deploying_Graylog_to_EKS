@@ -7,9 +7,6 @@ env:
   CONTAINER_IMAGE_VERSION: 0.5
   DOCKER_USER: ${{ secrets.DOCKER_USER }}  
   DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-  AWS_DEFAULT_REGION: us-east-1
-  AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
-  AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
   
 on: [push]
 
@@ -19,17 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-#      - name: Build httpd container image
-#        run: |
-#          docker build ./ -t mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
-#
-#      - name: Docker login
-#        run: |
-#          docker login -u $DOCKER_USER -p $DOCKER_PASS
-#
-#      - name: Push image to DockerHub
-#        run: |
-#          docker push mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
+      - name: Build httpd container image
+        run: |
+          docker build ./ -t mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
+
+      - name: Docker login
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+
+      - name: Push image to DockerHub
+        run: |
+          docker push mtimoshchenko/mtim-test-ghact:$CONTAINER_IMAGE_VERSION
 
       - name: Installation AWS CLI
         run: |
@@ -40,10 +37,11 @@ jobs:
           aws --version
         
       - name: Configure AWS Credentials
-        run: |
-          export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
-          export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
-          export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: us-east-1
           
       - name: Installing eksctl tool
         run: |
@@ -75,3 +73,7 @@ jobs:
           eksctl get nodegroup --cluster $CLUSTER_NAME -o yaml
           echo -e "#-----------------------------------#\nCluster info from kubectl:\t"
           kubectl cluster-info
+
+      - name: Deploying simple app to EKS cluster
+        run: |
+          kubectl apply -f apache-test.yaml
