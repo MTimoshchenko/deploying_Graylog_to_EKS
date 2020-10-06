@@ -1,6 +1,6 @@
 name: Deploy httpd in EKS
-
-on: [push]
+# trigger stopped
+# on: [push]
 
 jobs:
   build:
