@@ -12,8 +12,3 @@ output "private_subnets" {
   description = "List of private subnets."
   value       = module.vpc.private_subnets
 }
-
-//output "dns_zone_private" {
-//  description = "Private DNS zone ID."
-//  value       = module.dns_private.dns_zone
-//}

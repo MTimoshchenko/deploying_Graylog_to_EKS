@@ -37,5 +37,5 @@ variable "manage_default_vpc" {
 variable "reuse_nat_ips" {
   type        = bool
   description = "The choice to reuse nat ips."
-  default     = true
+  default     = false
 }

@@ -15,10 +15,10 @@ variable "vpc_cidr" {
 
 variable "azs" {
   type        = list(string)
-  description = "Availability zones in which to create the subnets".
+  description = "Availability zones in which to create the subnets."
 }
 
-variable "internal_dns_zone" {
-  type        = string
-  description = "Internal dns zone name."
-}
+//variable "internal_dns_zone" {
+//  type        = string
+//  description = "Internal dns zone name."
+//}
