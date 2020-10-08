@@ -1,1 +1,3 @@
-/.github/workflows/
+*.tfstate.backup
+*.tfstate
+*.terraform/

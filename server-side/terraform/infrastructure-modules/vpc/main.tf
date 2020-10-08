@@ -1,6 +1,6 @@
 module "vpc" {
   source                   = "terraform-aws-modules/vpc/aws"
-  version                  = "2.56.0"
+  version                  = "2.57.0"
   name                     = var.vpc_name
   azs                      = var.azs
   cidr                     = var.vpc_cidr
@@ -12,9 +12,9 @@ module "vpc" {
   public_subnets           = local.public_subnets
   manage_default_vpc       = var.manage_default_vpc
   reuse_nat_ips            = var.reuse_nat_ips
-  external_nat_ip_ids      = module.nat_eip.eip_ids
-  enable_dhcp_options      = true
-  dhcp_options_domain_name = var.internal_dns_zone
+//  external_nat_ip_ids      = module.nat_eip.eip_ids
+  enable_dhcp_options      = false
+//  dhcp_options_domain_name = var.internal_dns_zone
   tags = {
     "Cluster" = var.cluster_name
   }

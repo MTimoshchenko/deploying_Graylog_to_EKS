@@ -29,7 +29,7 @@ No provider.
 | manage\_default\_vpc | The choice to manage default vpc. | `bool` | `false` | no |
 | reuse\_nat\_ips | The choice to reuse nat ips. | `bool` | `true` | no |
 | vpc\_cidr | VPC IP CIDR map. | `string` | n/a | yes |
-| vpc\_name | VPC name. | `string` | n/a | yes |
+| vpc\_name| VPC name. | `string` | n/a | yes |
 
 ## Outputs
 
