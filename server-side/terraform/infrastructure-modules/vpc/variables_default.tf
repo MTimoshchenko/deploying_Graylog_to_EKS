@@ -16,6 +16,18 @@ variable "enable_nat_gateway" {
   default     = true
 }
 
+variable "single_nat_gateway" {
+  type        = bool
+  description = "Use one NAT Gateway for all azs."
+  default     = "true"
+}
+
+variable "one_nat_gateway_per_az" {
+  type        = bool
+  description = "Use one NAT Gateway per az."
+  default     = false
+}
+
 variable "enable_s3_endpoint" {
   type        = bool
   description = "The choice to enable s3 endpoint."
