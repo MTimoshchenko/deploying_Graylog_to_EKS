@@ -14,8 +14,8 @@ terraform {
 }
 
 provider "aws" {
-  profile = var.aws_profile
-  region = var.aws_region
+  profile = lookup(var.global_parameters, "aws_profile", null)
+  region  = lookup(var.global_parameters, "aws_region", null)
   version = ">= 3.9.0"
 }
 

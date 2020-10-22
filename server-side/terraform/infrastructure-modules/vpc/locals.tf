@@ -1,6 +1,6 @@
 locals {
-  subnet_prefix  = regex("^[0-9]{1,3}\\.[0-9]{1,3}", var.vpc_cidr)
-  azs_count      = length(var.azs)
+  subnet_prefix  = regex("^[0-9]{1,3}\\.[0-9]{1,3}", lookup(var.vpc_parameters, "vpc_cidr", null))
+  azs_count      = length(lookup(var.vpc_parameters, "azs", null))
   range_limit    = local.azs_count + 1
   public_subnets = [
     for num in range(1, local.range_limit) :

@@ -1,16 +1,9 @@
-variable "cluster_name" {
-  type        = string
-  description = "Cluster name."
+variable "global_parameters" {
+  description = "Global variables for each module."
 }
 
-variable "vpc_cidr" {
-  type        = string
-  description = "VPC ID CIDR map."
-}
-
-variable "azs" {
-  type        = list(string)
-  description = "Availability zones in which to create the subnets."
+variable "vpc_parameters" {
+  description = "Parameters for vpc creation: cidr and azs"
 }
 
 //variable "internal_dns_zone" {

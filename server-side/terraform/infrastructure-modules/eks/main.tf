@@ -1,14 +1,14 @@
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   version         = "13.0.0"
-  cluster_name    = "${var.environment}-${var.cluster_name}"
+  cluster_name    = "${lookup(var.global_parameters, "environment", null)}-${lookup(var.global_parameters, "cluster_name", null)}"
   cluster_version = "1.18"
   subnets         = var.private_subnets_id
   vpc_id          = var.vpc_id
 
   tags = {
-    Environment = var.environment
-    AppName     = var.cluster_name
+    Environment = lookup(var.global_parameters, "environment", null)
+    AppName     = lookup(var.global_parameters, "cluster_name", null)
   }
 
   node_groups_defaults = {
@@ -18,18 +18,22 @@ module "eks" {
 
   node_groups = {
     first = {
-      aws_region                    = var.aws_region
-      instance_type                 = var.instance_type
-      additional_userdata           = var.additional_userdata
+      aws_region                    = lookup(var.global_parameters, "aws_region", null)
+      instance_type                 = lookup(var.eks_parameters, "instance_type", null)
+      additional_userdata           = lookup(var.eks_parameters, "additional_userdata", null)
       additional_security_group_ids = var.sg_id
-      desired_capacity              = var.asg_desired_capacity
-      max_capacity                  = 4
-      min_capacity                  = 2
+      desired_capacity              = lookup(var.eks_parameters, "asg_desired_capacity", null)
+      max_capacity                  = lookup(var.eks_parameters, "asg_max_capacity", null)
+      min_capacity                  = lookup(var.eks_parameters, "asg_min_capacity", null)
       name                          = "group1"
 
+      tags = {
+        Name = "${lookup(var.global_parameters, "environment", null)}-${lookup(var.global_parameters, "cluster_name", null)}"
+      }
       k8s_labels = {
-        Environment = var.environment
-        Cluster     = var.cluster_name
+        Environment = lookup(var.global_parameters, "environment", null)
+        Cluster     = lookup(var.global_parameters, "cluster_name", null)
+        Region      = lookup(var.global_parameters, "aws_region", null)
       }
       additional_tags = {
         ExtraTag = "first"

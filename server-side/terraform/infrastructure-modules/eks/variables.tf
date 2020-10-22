@@ -1,6 +1,9 @@
-variable "aws_region" {
-  type        = string
-  description = "Default AWS region."
+variable "global_parameters" {
+  description = "Global variables for each module."
+}
+
+variable "eks_parameters" {
+  description = "Parameters for EKS creation."
 }
 
 variable "vpc_id" {
@@ -13,34 +16,9 @@ variable "sg_id" {
   description = "Security group ids"
 }
 
-variable "cluster_name" {
-  type        = string
-  description = "Cluster name."
-}
-
-variable "environment" {
-  type        = string
-  description = "Environment name."
-}
-
 variable "private_subnets_id" {
   type        = list(string)
   description = "List of private subnets ID."
-}
-
-variable "instance_type" {
-  type        = string
-  description = "Type of instance. exp: t2-micro."
-}
-
-variable "additional_userdata" {
-  type        = string
-  description = "Additional userdata."
-}
-
-variable "asg_desired_capacity" {
-  type        = number
-  description = "Count of nodes in cluster."
 }
 
 variable "map_accounts" {

@@ -1,9 +1,9 @@
 module "vpc" {
   source                   = "terraform-aws-modules/vpc/aws"
   version                  = "2.57.0"
-  name                     = "${var.cluster_name}-vpc"
-  azs                      = var.azs
-  cidr                     = var.vpc_cidr
+  name                     = "${lookup(var.global_parameters, "environment", null)}-${lookup(var.global_parameters, "cluster_name", null)}-vpc"
+  azs                      = lookup(var.vpc_parameters, "azs", null)
+  cidr                     = lookup(var.vpc_parameters, "vpc_cidr", null)
   enable_dns_hostnames     = var.enable_dns_hostnames
   enable_dns_support       = var.enable_dns_support
   enable_s3_endpoint       = var.enable_s3_endpoint
@@ -22,14 +22,13 @@ module "vpc" {
 //  dhcp_options_domain_name = var.internal_dns_zone
 
   tags = {
-    "Cluster" = var.cluster_name
+    Cluster     = lookup(var.global_parameters, "cluster_name", null)
+    Environment = lookup(var.global_parameters, "environment", null)
   }
-
   public_subnet_tags = {
-    "Tier" = "public"
+    Tier = "public"
   }
-
   private_subnet_tags = {
-    "Tier" = "private"
+    Tier = "private"
   }
 }
