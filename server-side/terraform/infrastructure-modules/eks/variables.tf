@@ -11,10 +11,10 @@ variable "vpc_id" {
   description = "VPC ID CIDR map."
 }
 
-variable "sg_id" {
-  type        = string
-  description = "Security group ids"
-}
+//variable "sg_id" {
+//  type        = string
+//  description = "Security group ids"
+//}
 
 variable "private_subnets_id" {
   type        = list(string)

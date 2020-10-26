@@ -18,10 +18,10 @@ output "private_subnets" {
   value       = module.vpc.private_subnets
 }
 
-output "sg_id" {
-  description = "Security group ID."
-  value       = module.sg.sg_id.this_security_group_id
-}
+//output "sg_id" {
+//  description = "Security group ID."
+//  value       = module.sg.sg_id.this_security_group_id
+//}
 
 output "cluster_endpoint" {
   description = "EKS cluster endpoint."

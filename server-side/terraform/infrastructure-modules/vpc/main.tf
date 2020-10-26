@@ -26,9 +26,13 @@ module "vpc" {
     Environment = lookup(var.global_parameters, "environment", null)
   }
   public_subnet_tags = {
-    Tier = "public"
+    Tier                     = "public"
+    "kubernetes.io/role/elb" = 1
+    KubernetesCluster = "${lookup(var.global_parameters, "environment", null)}-${lookup(var.global_parameters, "cluster_name", null)}"
   }
   private_subnet_tags = {
-    Tier = "private"
+    Tier                              = "private"
+    "kubernetes.io/role/internal-elb" = 1
+    KubernetesCluster = "${lookup(var.global_parameters, "environment", null)}-${lookup(var.global_parameters, "cluster_name", null)}"
   }
 }

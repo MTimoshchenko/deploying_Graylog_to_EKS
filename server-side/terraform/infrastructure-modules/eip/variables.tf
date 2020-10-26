@@ -1,11 +1,5 @@
-variable "cluster_name" {
-  type        = string
-  description = "Cluster name."
-}
-
-variable "eip_name" {
-  type        = string
-  description = "Name of EIP."
+variable "global_parameters" {
+  description = "Global variables for each module."
 }
 
 variable "eip_count" {
