@@ -10,4 +10,5 @@ ToDo:
 > ~~4. Test ^ locally~~  
 > 5. Create GitHub Actions according to the diagram and test/polish it  
 > 6. Create the required manifests for Graylog EKS cluster and test it  
-> 7. Agree on the required architecture anf apply it  
+> 7. Agree on the required architecture anf apply it
+> 8. Polish it one more time :) 
